@@ -34,8 +34,6 @@
       Send result
     </button>
   </form>
-
-  {{ results }}
 </template>
 
 <script>
@@ -50,13 +48,15 @@ export default {
     return {
       name: "",
       score: "",
-      results: [],
+      result: [],
     };
   },
 
   methods: {
     saveRecord() {
-      this.results.push({ name: this.name, score: this.score });
+      this.result.push({ name: this.name, score: this.score });
+      let json = JSON.stringify(this.result);
+      console.log(json);
       this.name = "";
       this.score = "";
     },

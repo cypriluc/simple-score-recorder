@@ -18,6 +18,9 @@
 </template>
 
 <script>
+//import axios from "axios";
+import data from "../../db.json";
+
 export default {
   name: "ScoreTable",
 
@@ -32,6 +35,22 @@ export default {
         { id: "03", name: "Adam", score: 333 },
       ],
     };
+  },
+
+  created() {
+    // get results from db when component is created
+    /*     axios
+      .get("../../db.json")
+      .then((response) => {
+        this.results = response.data;
+        console.log(this.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      }); */
+    if (data) {
+      this.results = data.results;
+    }
   },
 
   computed: {
