@@ -18,8 +18,7 @@
 </template>
 
 <script>
-//import axios from "axios";
-import data from "../../db.json";
+import ScoreService from "@/services/ScoreService.js";
 
 export default {
   name: "ScoreTable",
@@ -28,29 +27,19 @@ export default {
 
   data() {
     return {
-      results: [
-        { id: "00", name: "Lukáš", score: 225 },
-        { id: "01", name: "Lisa", score: 178 },
-        { id: "02", name: "Šimon", score: 405 },
-        { id: "03", name: "Adam", score: 333 },
-      ],
+      results: [],
     };
   },
 
   created() {
     // get results from db when component is created
-    /*     axios
-      .get("../../db.json")
+    ScoreService.getResults()
       .then((response) => {
         this.results = response.data;
-        console.log(this.results);
       })
       .catch((error) => {
         console.log(error);
-      }); */
-    if (data) {
-      this.results = data.results;
-    }
+      });
   },
 
   computed: {

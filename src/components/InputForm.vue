@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
   </div>
 
-  <form action="#" method="post">
+  <form @submit.prevent="saveRecord">
     <div class="input-group">
       <label for="participantName" class="form-label m-2">Name</label>
       <input
@@ -12,7 +12,7 @@
         class="form-control"
         placeholder="Name"
         aria-label="Name"
-        v-model="name"
+        v-model="result.name"
         required
       />
     </div>
@@ -25,18 +25,18 @@
         class="form-control"
         placeholder="Score"
         aria-label="Score"
-        v-model="score"
+        v-model="result.score"
         required
       />
     </div>
 
-    <button type="button" class="btn btn-success m-2" v-on:click="saveRecord">
-      Send result
-    </button>
+    <button type="submit" class="btn btn-success m-2">Send result</button>
   </form>
 </template>
 
 <script>
+import ScoreService from "@/services/ScoreService.js";
+
 export default {
   name: "InputForm",
 
@@ -46,19 +46,41 @@ export default {
 
   data() {
     return {
-      name: "",
-      score: "",
-      result: [],
+      result: {
+        id: "",
+        name: "",
+        score: "",
+      },
     };
   },
 
   methods: {
     saveRecord() {
-      this.result.push({ name: this.name, score: this.score });
-      let json = JSON.stringify(this.result);
-      console.log(json);
-      this.name = "";
-      this.score = "";
+      this.result.id = this.generateId();
+
+      console.log(this.result);
+
+      /*     let json = JSON.stringify(this.result);
+      console.log(json); */
+
+      // post request to db
+      ScoreService.postResult(this.result)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // handle form submission here
+
+      // clear data
+      /*       this.result.id = "";
+      this.result.name = "";
+      this.result.score = ""; */
+    },
+
+    generateId() {
+      return "_" + Math.random().toString(36).substr(2, 9);
     },
   },
 };
