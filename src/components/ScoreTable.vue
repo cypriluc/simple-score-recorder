@@ -32,13 +32,15 @@ export default {
   },
 
   created() {
-    // get results from db when component is created
+    ///////////// AXIOS CALL ////////
     ScoreService.getResults()
       .then((response) => {
         this.results = response.data;
       })
       .catch((error) => {
         console.log(error);
+        ///////////// SET LOCAL STORAGE AS BACKUP ////////
+        this.results = JSON.parse(localStorage.getItem("results"));
       });
   },
 
