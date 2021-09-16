@@ -12,6 +12,8 @@
         class="form-control"
         placeholder="Name"
         aria-label="Name"
+        v-model="name"
+        required
       />
     </div>
 
@@ -19,22 +21,45 @@
       <label for="totalScore" class="form-label m-2">Score</label>
       <input
         id="totalScore"
-        type="text"
+        type="number"
         class="form-control"
         placeholder="Score"
         aria-label="Score"
+        v-model="score"
+        required
       />
     </div>
 
-    <button type="button" class="btn btn-success m-2">Send result</button>
+    <button type="button" class="btn btn-success m-2" v-on:click="saveRecord">
+      Send result
+    </button>
   </form>
+
+  {{ results }}
 </template>
 
 <script>
 export default {
   name: "InputForm",
+
   props: {
     msg: String,
+  },
+
+  data() {
+    return {
+      name: "",
+      score: "",
+      results: [],
+    };
+  },
+
+  methods: {
+    saveRecord() {
+      this.results.push({ name: this.name, score: this.score });
+      this.name = "";
+      this.score = "";
+    },
   },
 };
 </script>
