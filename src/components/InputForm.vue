@@ -32,6 +32,8 @@
 
     <button type="submit" class="btn btn-success m-2">Send result</button>
   </form>
+
+  {{ results }}
 </template>
 
 <script>
@@ -46,6 +48,7 @@ export default {
 
   data() {
     return {
+      results: [],
       result: {
         id: "",
         name: "",
@@ -54,16 +57,30 @@ export default {
     };
   },
 
+  mounted() {
+    //////////// LOCAL STORAGE /////////////
+    if (localStorage.getItem("results")) {
+      try {
+        this.results = JSON.parse(localStorage.getItem("results"));
+        console.log(this.results);
+      } catch (err) {
+        localStorage.removeItem("results");
+      }
+    }
+  },
+
   methods: {
     saveRecord() {
       this.result.id = this.generateId();
 
-      console.log(this.result);
+      //////////// LOCAL STORAGE /////////////
+      let newResult = { ...this.result };
+      this.results.push(newResult);
+      console.log(this.results);
 
-      /*     let json = JSON.stringify(this.result);
-      console.log(json); */
+      this.saveResults();
 
-      // post request to db
+      //////////// AXIOS CALL /////////////
       ScoreService.postResult(this.result)
         .then((response) => {
           console.log(response);
@@ -71,12 +88,18 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+
       // handle form submission here
 
-      // clear data
-      /*       this.result.id = "";
+      // clear this result
+      this.result.id = "";
       this.result.name = "";
-      this.result.score = ""; */
+      this.result.score = "";
+    },
+
+    saveResults() {
+      const parsed = JSON.stringify(this.results);
+      localStorage.setItem("results", parsed);
     },
 
     generateId() {

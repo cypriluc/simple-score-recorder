@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://my-json-server.typicode.com/cypriluc/simple-score-recorder",
+  baseURL: "http://localhost:3000/",
+  // baseURL: "https://my-json-server.typicode.com/cypriluc/simple-score-recorder",
   withCredentials: false,
   headers: {
     Accept: "application/json",
