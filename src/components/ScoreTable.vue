@@ -18,61 +18,18 @@
 </template>
 
 <script>
-import ScoreService from "@/services/ScoreService.js";
 import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "ScoreTable",
 
-  props: [],
-
-  data() {
-    return {
-      results: [],
-    };
-  },
-
   created() {
-    /*     EventBus.$on("score-updated", function () {
-      ScoreService.getResults()
-        .then((response) => {
-          this.results = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }); */
-    ///////////// AXIOS CALL ////////
-    ScoreService.getResults()
-      .then((response) => {
-        this.results = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    ///////////// SET LOCAL STORAGE AS BACKUP ////////
-    /*     if (!this.results.length) {
-      if (localStorage.getItem("results")) {
-        try {
-          this.results = JSON.parse(localStorage.getItem("results"));
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    } */
+    this.$store.dispatch("fetchResults");
   },
 
   computed: {
-    sortedResults() {
-      const sorted = [...this.results];
-      return sorted.sort(function (a, b) {
-        return a.score - b.score;
-      });
-    },
-
-    ...mapGetters(["catLength"]),
-    ...mapState(["user", "categories"]),
+    ...mapState(["results"]),
+    ...mapGetters(["sortedResults"]),
   },
 
   mounted() {},

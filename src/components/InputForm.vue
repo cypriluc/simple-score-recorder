@@ -55,6 +55,7 @@
 
 <script>
 // import NProgress from "nprogress";
+import { mapState } from "vuex";
 
 export default {
   name: "InputForm",
@@ -69,6 +70,10 @@ export default {
       requestResult: 0,
       currentName: "",
     };
+  },
+
+  computed: {
+    ...mapState(["results"]),
   },
 
   methods: {
@@ -105,7 +110,6 @@ export default {
     },
 
     showMessage(type) {
-      console.log("showing message");
       const messageContainer = document.getElementById("infoMessage");
       if (type == "success") {
         messageContainer.classList.add("message__container--success");

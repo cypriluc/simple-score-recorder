@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import ScoreService from "@/services/ScoreService.js";
+import createMultiTabState from "vuex-multi-tab-state";
 
 export default createStore({
   state: {
@@ -10,6 +11,10 @@ export default createStore({
     ADD_RESULT(state, result) {
       state.results.push(result);
     },
+
+    SET_RESULTS(state, results) {
+      state.results = results;
+    },
   },
 
   actions: {
@@ -18,16 +23,30 @@ export default createStore({
         commit("ADD_RESULT", result);
       });
     },
+
+    fetchResults({ commit }) {
+      ScoreService.getResults()
+        .then((response) => {
+          commit("SET_RESULTS", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 
   getters: {
-    catLength: (state) => {
-      return state.categories.length;
-    },
-
     resultsLength: (state) => {
       return state.results.length;
     },
+
+    sortedResults: (state) => {
+      const sorted = [...state.results];
+      return sorted.sort(function (a, b) {
+        return a.score - b.score;
+      });
+    },
   },
-  modules: {},
+
+  plugins: [createMultiTabState()],
 });
