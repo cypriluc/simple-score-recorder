@@ -1,10 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-  </div>
-
   <form @submit.prevent="createResult">
-    <div class="input-group">
+    <div class="input-group pb-4">
       <label for="participantName" class="form-label m-2">Name</label>
       <input
         id="participantName"
@@ -17,7 +13,9 @@
       />
     </div>
 
-    <div class="input-group">
+    <StopWatch />
+
+    <div class="input-group pb-4">
       <label for="totalScore" class="form-label m-2">Score</label>
       <input
         id="totalScore"
@@ -30,7 +28,7 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-success m-2" id="submitBtn">
+    <button type="submit" class="btn btn-secondary m-2" id="submitBtn">
       Send result
     </button>
   </form>
@@ -56,12 +54,13 @@
 <script>
 // import NProgress from "nprogress";
 import { mapState } from "vuex";
+import StopWatch from "@/components/StopWatch.vue";
 
 export default {
   name: "InputForm",
 
-  props: {
-    msg: String,
+  components: {
+    StopWatch,
   },
 
   data() {
@@ -138,7 +137,7 @@ export default {
 .message {
   &__container {
     padding: 1rem 2rem;
-    border-radius: 20rem;
+    border-radius: 0.25rem;
     transition: all 0.2s;
 
     &--success {

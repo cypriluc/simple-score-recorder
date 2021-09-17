@@ -1,6 +1,6 @@
 <template>
   <div class="home container mt-5">
-    <InputForm msg="Enter a participant" />
+    <InputForm />
   </div>
 </template>
 

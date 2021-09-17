@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ScoreTable",
@@ -28,7 +28,6 @@ export default {
   },
 
   computed: {
-    ...mapState(["results"]),
     ...mapGetters(["sortedResults"]),
   },
 
