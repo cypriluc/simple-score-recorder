@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
   </div>
 
-  <form @submit.prevent="saveRecord">
+  <form @submit.prevent="createResult">
     <div class="input-group">
       <label for="participantName" class="form-label m-2">Name</label>
       <input
@@ -30,7 +30,9 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-success m-2">Send result</button>
+    <button type="submit" class="btn btn-success m-2" id="submitBtn">
+      Send result
+    </button>
   </form>
 
   <!-- alert message -->
@@ -52,8 +54,7 @@
 </template>
 
 <script>
-import ScoreService from "@/services/ScoreService.js";
-import NProgress from "nprogress";
+// import NProgress from "nprogress";
 
 export default {
   name: "InputForm",
@@ -64,73 +65,47 @@ export default {
 
   data() {
     return {
-      results: [],
-      result: {
-        id: "",
-        name: "",
-        score: "",
-      },
+      result: this.createFreshResult(),
       requestResult: 0,
       currentName: "",
     };
   },
 
-  mounted() {
-    //////////// LOCAL STORAGE /////////////
-    /*     if (localStorage.getItem("results")) {
-      try {
-        this.results = JSON.parse(localStorage.getItem("results"));
-        console.log(this.results);
-      } catch (err) {
-        localStorage.removeItem("results");
-      }
-    } */
-  },
-
   methods: {
-    saveRecord() {
-      this.result.id = this.generateId();
+    createResult() {
       this.currentName = this.result.name;
 
-      //////////// LOCAL STORAGE /////////////
-      /*       let newResult = { ...this.result };
-      this.results.push(newResult);
-      console.log(this.results);
-
-      this.saveResults(); */
-
-      //////////// AXIOS CALL /////////////
-      ScoreService.postResult(this.result)
-        .then((response) => {
-          console.log(response);
+      this.$store
+        .dispatch("createResult", this.result)
+        .then(() => {
           this.requestResult = 1;
           this.showMessage("success");
+
+          this.result = this.createFreshResult();
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log("There was an error creating your result:");
+          console.log(err);
           this.requestResult = 0;
           this.showMessage("error");
-          NProgress.done();
+          // NProgress.done();
         });
 
-      // handle form submission here
-
-      // clear this result
-      this.result.id = "";
-      this.result.name = "";
-      this.result.score = "";
+      document.activeElement.blur();
     },
 
-    saveResults() {
-      const parsed = JSON.stringify(this.results);
-      localStorage.setItem("results", parsed);
-    },
+    createFreshResult() {
+      const id = Math.floor(Math.random() * 10000000);
 
-    generateId() {
-      return "_" + Math.random().toString(36).substr(2, 9);
+      return {
+        id: id,
+        name: "",
+        score: 0,
+      };
     },
 
     showMessage(type) {
+      console.log("showing message");
       const messageContainer = document.getElementById("infoMessage");
       if (type == "success") {
         messageContainer.classList.add("message__container--success");

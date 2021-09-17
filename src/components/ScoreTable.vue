@@ -19,7 +19,7 @@
 
 <script>
 import ScoreService from "@/services/ScoreService.js";
-//import { watchEffect } from "vue";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "ScoreTable",
@@ -33,6 +33,15 @@ export default {
   },
 
   created() {
+    /*     EventBus.$on("score-updated", function () {
+      ScoreService.getResults()
+        .then((response) => {
+          this.results = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }); */
     ///////////// AXIOS CALL ////////
     ScoreService.getResults()
       .then((response) => {
@@ -61,6 +70,9 @@ export default {
         return a.score - b.score;
       });
     },
+
+    ...mapGetters(["catLength"]),
+    ...mapState(["user", "categories"]),
   },
 
   mounted() {},
