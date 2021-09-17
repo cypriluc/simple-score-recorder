@@ -19,6 +19,7 @@
 
 <script>
 import ScoreService from "@/services/ScoreService.js";
+//import { watchEffect } from "vue";
 
 export default {
   name: "ScoreTable",
@@ -39,9 +40,18 @@ export default {
       })
       .catch((error) => {
         console.log(error);
-        ///////////// SET LOCAL STORAGE AS BACKUP ////////
-        this.results = JSON.parse(localStorage.getItem("results"));
       });
+
+    ///////////// SET LOCAL STORAGE AS BACKUP ////////
+    /*     if (!this.results.length) {
+      if (localStorage.getItem("results")) {
+        try {
+          this.results = JSON.parse(localStorage.getItem("results"));
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    } */
   },
 
   computed: {
