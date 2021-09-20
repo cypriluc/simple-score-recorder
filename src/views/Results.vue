@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is results page</h1>
+    <h1>Pořadí</h1>
     <ScoreTable />
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="createResult">
     <div class="input-group pb-4">
-      <label for="participantName" class="form-label m-2">Name</label>
+      <label for="participantName" class="form-label m-2">Jméno</label>
       <input
         id="participantName"
         type="text"
@@ -16,7 +16,7 @@
     <StopWatch @elapsedTime="saveElapsedTime" ref="stopWatch" />
 
     <div class="input-group pb-4">
-      <label for="totalScore" class="form-label m-2">Score</label>
+      <label for="totalScore" class="form-label m-2">Celkové skóre</label>
       <input
         id="totalScore"
         type="number"
@@ -29,7 +29,7 @@
     </div>
 
     <button type="submit" class="btn btn-secondary m-2" id="submitBtn">
-      Send result
+      Zapsat výsledek
     </button>
   </form>
 
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-// import NProgress from "nprogress";
+import NProgress from "nprogress";
 import { mapState } from "vuex";
 import StopWatch from "@/components/StopWatch.vue";
 
@@ -93,7 +93,7 @@ export default {
           console.log(err);
           this.requestResult = 0;
           this.showMessage("error");
-          // NProgress.done();
+          NProgress.done();
         });
 
       document.activeElement.blur();

@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Score</th>
+        <th scope="col">Jméno</th>
+        <th scope="col">Skóre</th>
       </tr>
     </thead>
     <tbody>
