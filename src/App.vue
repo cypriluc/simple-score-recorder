@@ -15,6 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $color-primary-dark;
+  box-sizing: border-box;
 }
 
 #nav {

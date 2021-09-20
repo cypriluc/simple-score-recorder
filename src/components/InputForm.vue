@@ -1,5 +1,6 @@
 <template>
-  <form @submit.prevent="createResult">
+  <form @submit.prevent="createResult" autocomplete="off">
+    <!-- Name -->
     <div class="input-group pb-4">
       <label for="participantName" class="form-label m-2">Jméno</label>
       <input
@@ -13,19 +14,44 @@
       />
     </div>
 
+    <!-- StopWatch -->
     <StopWatch @elapsedTime="saveElapsedTime" ref="stopWatch" />
 
-    <div class="input-group pb-4">
-      <label for="totalScore" class="form-label m-2">Celkové skóre</label>
-      <input
-        id="totalScore"
-        type="number"
-        class="form-control"
-        placeholder="Score"
-        aria-label="Score"
-        v-model="result.score"
-        required
-      />
+    <!-- Penalty -->
+    <div class="row">
+      <div class="col mx-auto">
+        <h4 class="text-left">First item</h4>
+
+        <div class="input-group mx-4 justify-content-center">
+          <div
+            class="option"
+            v-for="(option, index) in penaltyOptions"
+            :key="index"
+          >
+            <label :for="option.id" class="btn btn-sm" :class="option.class">
+              {{ option.label }}
+            </label>
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              :id="option.id"
+              :value="option.value"
+              v-model="penaltyPoints[0]"
+            />
+          </div>
+        </div>
+      </div>
+
+      {{ penaltyPoints }}
+      {{ currentPenalty }}
+    </div>
+
+    <div v-if="currentScore" class="input-group pb-4">
+      <h4>
+        Total Score: <span>{{ currentScore }}</span>
+      </h4>
     </div>
 
     <button type="submit" class="btn btn-secondary m-2" id="submitBtn">
@@ -68,16 +94,38 @@ export default {
       result: this.createFreshResult(),
       requestResult: 0,
       currentName: "",
+      penaltyPoints: [0, 0, 0, 0],
+      penaltyOptions: [
+        { id: "option1-1", label: "Great", value: 0, class: "btn-success" },
+        { id: "option1-2", label: "OK", value: 10000, class: "btn-secondary" },
+        { id: "option1-3", label: "Fail", value: 20000, class: "btn-danger" },
+      ],
+      searchedItems: [{ id: "item-1", title: "First Item", options: "" }],
     };
   },
 
   computed: {
     ...mapState(["results"]),
+
+    currentScore() {
+      return this.result.time + this.result.penalty;
+    },
+
+    currentPenalty() {
+      let penalty = this.penaltyPoints.reduce(function (a, b) {
+        return a + b;
+      }, 0);
+      return penalty;
+    },
   },
 
   methods: {
     createResult() {
       this.currentName = this.result.name;
+      this.result.penalty = this.currentPenalty;
+
+      let finalScore = Math.floor(this.currentScore / 1000);
+      this.result.score = finalScore;
 
       this.$store
         .dispatch("createResult", this.result)
@@ -106,6 +154,7 @@ export default {
         id: id,
         name: "",
         time: 0,
+        penalty: 0,
         score: 0,
       };
     },

@@ -14,6 +14,13 @@
       "id": 789,
       "name": "Lisa",
       "score": 333
+    },
+    {
+      "id": 91257,
+      "name": "Luu",
+      "time": 48290,
+      "penalty": 20000,
+      "score": 68
     }
   ]
 }

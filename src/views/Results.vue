@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>Pořadí</h1>
+    <h1>Síň slávy</h1>
     <ScoreTable />
   </div>
 </template>
