@@ -13,7 +13,7 @@
       />
     </div>
 
-    <StopWatch />
+    <StopWatch @elapsedTime="saveElapsedTime" ref="stopWatch" />
 
     <div class="input-group pb-4">
       <label for="totalScore" class="form-label m-2">Score</label>
@@ -84,6 +84,7 @@ export default {
         .then(() => {
           this.requestResult = 1;
           this.showMessage("success");
+          this.$refs.stopWatch.reset();
 
           this.result = this.createFreshResult();
         })
@@ -104,6 +105,7 @@ export default {
       return {
         id: id,
         name: "",
+        time: 0,
         score: 0,
       };
     },
@@ -123,6 +125,10 @@ export default {
         messageContainer.classList.remove("message__container--success");
         messageContainer.classList.remove("message__container--error");
       }, 5000);
+    },
+
+    saveElapsedTime(time) {
+      this.result.time = time;
     },
   },
 };

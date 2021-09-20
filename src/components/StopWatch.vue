@@ -1,33 +1,33 @@
 <template>
   <div class="input-group pb-4">
-    <div class="time">
-      <h2 id="timeText">{{ printTime }}</h2>
-    </div>
-    <div class="btn-group d-flex mx-auto" role="group">
-      <button
-        id="startBtn"
-        type="button"
-        class="btn btn-secondary"
-        v-on:click="start()"
-      >
-        Start
-      </button>
-      <button
-        id="stopBtn"
-        type="button"
-        class="btn btn-secondary"
-        v-on:click="stop()"
-      >
-        Stop
-      </button>
-      <button
-        id="resetBtn"
-        type="button"
-        class="btn btn-danger"
-        v-on:click="reset()"
-      >
-        Reset
-      </button>
+    <div class="stopwatch mx-auto">
+      <h2 class="stopwatch__text" id="timeText">{{ printTime }}</h2>
+      <div class="btn-group" role="group">
+        <button
+          id="startBtn"
+          type="button"
+          class="btn btn-secondary"
+          v-on:click="start()"
+        >
+          Start
+        </button>
+        <button
+          id="stopBtn"
+          type="button"
+          class="btn btn-secondary"
+          v-on:click="stop()"
+        >
+          Stop
+        </button>
+        <button
+          id="resetBtn"
+          type="button"
+          class="btn btn-danger"
+          v-on:click="reset()"
+        >
+          Reset
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +56,8 @@ export default {
 
     stop() {
       clearInterval(this.timerInterval);
+      let roundElapsedTime = Math.floor(this.elapsedTime / 10) * 10;
+      this.$emit("elapsedTime", roundElapsedTime);
     },
 
     reset() {
@@ -88,8 +90,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.time {
-  display: block;
-  width: 100%;
+.stopwatch {
+  &__text {
+    text-align: left;
+    margin-left: 2.5rem;
+  }
 }
 </style>
