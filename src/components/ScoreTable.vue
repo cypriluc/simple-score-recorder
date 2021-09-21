@@ -11,7 +11,7 @@
       <tr v-for="(result, index) in sortedResults" :key="result.id">
         <th scope="row">{{ index + 1 }}</th>
         <td>{{ result.name }}</td>
-        <td>{{ result.score }}</td>
+        <td>{{ result.scoreFormated }}</td>
       </tr>
     </tbody>
   </table>

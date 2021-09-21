@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import TimeFormat from "@/logic/TimeFormat.js";
+
 export default {
   name: "StopWatch",
 
@@ -41,7 +43,7 @@ export default {
       startTime: 0,
       elapsedTime: 0,
       timerInterval: 0,
-      printTime: "00:00:00",
+      printTime: "00:00.00",
     };
   },
 
@@ -50,7 +52,7 @@ export default {
       this.startTime = Date.now() - this.elapsedTime;
       this.timerInterval = setInterval(() => {
         this.elapsedTime = Date.now() - this.startTime;
-        this.timeToString(this.elapsedTime);
+        this.printTime = new TimeFormat(this.elapsedTime).getTime();
       }, 10);
     },
 
@@ -62,28 +64,8 @@ export default {
 
     reset() {
       clearInterval(this.timerInterval);
-      this.printTime = "00:00:00";
+      this.printTime = "00:00.00";
       this.elapsedTime = 0;
-    },
-
-    timeToString(time) {
-      let diffInHrs = time / 3600000;
-      let hh = Math.floor(diffInHrs);
-
-      let diffInMin = (diffInHrs - hh) * 60;
-      let mm = Math.floor(diffInMin);
-
-      let diffInSec = (diffInMin - mm) * 60;
-      let ss = Math.floor(diffInSec);
-
-      let diffInMs = (diffInSec - ss) * 100;
-      let ms = Math.floor(diffInMs);
-
-      let formattedMM = mm.toString().padStart(2, "0");
-      let formattedSS = ss.toString().padStart(2, "0");
-      let formattedMS = ms.toString().padStart(2, "0");
-
-      this.printTime = `${formattedMM}:${formattedSS}:${formattedMS}`;
     },
   },
 };

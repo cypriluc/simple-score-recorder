@@ -48,13 +48,15 @@
         </div>
       </div>
 
+      <p>Penalty: {{ penaltyFormated }}</p>
+
       {{ penaltyPoints }}
       {{ currentPenalty }}
     </div>
 
     <div v-if="currentScore" class="input-group pb-4">
       <h4>
-        Total Score: <span>{{ currentScore }}</span>
+        Total Score: <span>{{ currentScoreFormated }}</span>
       </h4>
     </div>
 
@@ -85,6 +87,7 @@
 import NProgress from "nprogress";
 import { mapState } from "vuex";
 import StopWatch from "@/components/StopWatch.vue";
+import TimeFormat from "@/logic/TimeFormat.js";
 
 export default {
   name: "InputForm",
@@ -120,25 +123,35 @@ export default {
   computed: {
     ...mapState(["results"]),
 
-    currentScore() {
-      return this.result.time + this.result.penalty;
-    },
-
     currentPenalty() {
       let penalty = this.penaltyPoints.reduce(function (a, b) {
         return a + b;
       }, 0);
       return penalty;
     },
+
+    penaltyFormated() {
+      let formatedPenalty = new TimeFormat(this.currentPenalty).getTime();
+      return formatedPenalty;
+    },
+
+    currentScore() {
+      return this.result.time + this.currentPenalty;
+    },
+
+    currentScoreFormated() {
+      let formatedScore = new TimeFormat(this.currentScore).getTime();
+      return formatedScore;
+    },
   },
 
   methods: {
     createResult() {
       this.currentName = this.result.name;
-      this.result.penalty = this.currentPenalty;
+      this.result.penalties = this.penaltyPoints;
 
-      let finalScore = Math.floor(this.currentScore / 1000);
-      this.result.score = finalScore;
+      this.result.score = this.currentScore;
+      this.result.scoreFormated = this.currentScoreFormated;
 
       this.$store
         .dispatch("createResult", this.result)
@@ -148,6 +161,7 @@ export default {
           this.$refs.stopWatch.reset();
 
           this.result = this.createFreshResult();
+          this.penaltyPoints = new Array(8).fill(0);
         })
         .catch((err) => {
           console.log("There was an error creating your result:");
@@ -167,8 +181,9 @@ export default {
         id: id,
         name: "",
         time: 0,
-        penalty: 0,
+        penalties: [],
         score: 0,
+        scoreFormated: "",
       };
     },
 
