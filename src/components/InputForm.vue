@@ -19,16 +19,20 @@
 
     <!-- Penalty -->
     <div class="row">
-      <div class="col mx-auto">
-        <h4 class="text-left">First item</h4>
+      <div v-for="(item, item_index) in Items" :key="item" class="col p-4">
+        <h5 class="text-left">{{ item }}</h5>
 
-        <div class="input-group mx-4 justify-content-center">
+        <div class="input-group flex-nowrap justify-content-center">
           <div
             class="option"
             v-for="(option, index) in penaltyOptions"
             :key="index"
           >
-            <label :for="option.id" class="btn btn-sm" :class="option.class">
+            <label
+              :for="'option-' + item_index + '-' + index"
+              class="btn btn-sm"
+              :class="option.class"
+            >
               {{ option.label }}
             </label>
 
@@ -36,9 +40,9 @@
               type="radio"
               class="btn-check"
               name="options"
-              :id="option.id"
+              :id="'option-' + item_index + '-' + index"
               :value="option.value"
-              v-model="penaltyPoints[0]"
+              v-model="penaltyPoints[item_index]"
             />
           </div>
         </div>
@@ -94,13 +98,22 @@ export default {
       result: this.createFreshResult(),
       requestResult: 0,
       currentName: "",
-      penaltyPoints: [0, 0, 0, 0],
-      penaltyOptions: [
-        { id: "option1-1", label: "Great", value: 0, class: "btn-success" },
-        { id: "option1-2", label: "OK", value: 10000, class: "btn-secondary" },
-        { id: "option1-3", label: "Fail", value: 20000, class: "btn-danger" },
+      Items: [
+        "First Item",
+        "Second Item",
+        "Third Item",
+        "Fourth Item",
+        "Fifth Item",
+        "Sixth Item",
+        "Seventh Item",
+        "Eight Item",
       ],
-      searchedItems: [{ id: "item-1", title: "First Item", options: "" }],
+      penaltyPoints: new Array(8).fill(0),
+      penaltyOptions: [
+        { label: "Great", value: 0, class: "btn-success" },
+        { label: "OK", value: 10000, class: "btn-secondary" },
+        { label: "Fail", value: 20000, class: "btn-danger" },
+      ],
     };
   },
 
