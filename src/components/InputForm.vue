@@ -22,12 +22,25 @@
       <div v-for="(item, item_index) in Items" :key="item" class="col p-4">
         <h5 class="text-left">{{ item }}</h5>
 
-        <div class="input-group flex-nowrap justify-content-center">
-          <div
-            class="option"
+        <div
+          class="btn-group flex-nowrap justify-content-center"
+          role="group"
+          aria-label="Group of options for penalty points"
+        >
+          <template
             v-for="(option, index) in penaltyOptions"
-            :key="index"
+            :key="item_index + index"
           >
+            <input
+              type="radio"
+              class="btn-check"
+              :name="'btnradio-' + item_index"
+              :id="'option-' + item_index + '-' + index"
+              :value="option.value"
+              v-model="penaltyPoints[item_index]"
+              :checked="index == 0"
+            />
+
             <label
               :for="'option-' + item_index + '-' + index"
               class="btn btn-sm"
@@ -35,23 +48,11 @@
             >
               {{ option.label }}
             </label>
-
-            <input
-              type="radio"
-              class="btn-check"
-              name="options"
-              :id="'option-' + item_index + '-' + index"
-              :value="option.value"
-              v-model="penaltyPoints[item_index]"
-            />
-          </div>
+          </template>
         </div>
       </div>
 
       <p>Penalty: {{ penaltyFormated }}</p>
-
-      {{ penaltyPoints }}
-      {{ currentPenalty }}
     </div>
 
     <div v-if="currentScore" class="input-group pb-4">
@@ -113,9 +114,9 @@ export default {
       ],
       penaltyPoints: new Array(8).fill(0),
       penaltyOptions: [
-        { label: "Great", value: 0, class: "btn-success" },
-        { label: "OK", value: 10000, class: "btn-secondary" },
-        { label: "Fail", value: 20000, class: "btn-danger" },
+        { label: "Great", value: 0, class: "btn-outline-success" },
+        { label: "OK", value: 10000, class: "btn-outline-secondary" },
+        { label: "Fail", value: 20000, class: "btn-outline-danger" },
       ],
     };
   },
