@@ -23,7 +23,7 @@
         <h5 class="text-left">{{ item }}</h5>
 
         <div
-          class="btn-group flex-nowrap justify-content-center"
+          class="btn-group btn-group-round"
           role="group"
           aria-label="Group of options for penalty points"
         >
@@ -55,13 +55,13 @@
       <p>Penalty: {{ penaltyFormated }}</p>
     </div>
 
-    <div v-if="currentScore" class="input-group pb-4">
+    <div class="input-group pb-4">
       <h4>
         Total Score: <span>{{ currentScoreFormated }}</span>
       </h4>
     </div>
 
-    <button type="submit" class="btn btn-secondary m-2" id="submitBtn">
+    <button type="submit" class="btn btn-primary btn-round m-2" id="submitBtn">
       Zapsat výsledek
     </button>
   </form>
@@ -114,7 +114,7 @@ export default {
       ],
       penaltyPoints: new Array(8).fill(0),
       penaltyOptions: [
-        { label: "Great", value: 0, class: "btn-outline-success" },
+        { label: "Great", value: 0, class: "btn-outline-info" },
         { label: "OK", value: 10000, class: "btn-outline-secondary" },
         { label: "Fail", value: 20000, class: "btn-outline-danger" },
       ],

@@ -1,7 +1,8 @@
 <template>
-  <div class="home container mt-5">
+  <div class="home container">
     <InputForm />
   </div>
+  <router-link to="/results" target="_blank">Výsledky</router-link>
 </template>
 
 <script>

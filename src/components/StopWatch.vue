@@ -2,11 +2,11 @@
   <div class="input-group pb-4">
     <div class="stopwatch mx-auto">
       <h2 class="stopwatch__text" id="timeText">{{ printTime }}</h2>
-      <div class="btn-group" role="group">
+      <div class="btn-group btn-group-round" role="group">
         <button
           id="startBtn"
           type="button"
-          class="btn btn-secondary"
+          class="btn btn-light"
           v-on:click="start()"
         >
           Start
@@ -14,7 +14,7 @@
         <button
           id="stopBtn"
           type="button"
-          class="btn btn-secondary"
+          class="btn btn-light"
           v-on:click="stop()"
         >
           Stop
