@@ -76,4 +76,8 @@ h1 {
 .btn-round {
   border-radius: 50rem !important;
 }
+.input-group > span,
+.input-group > input {
+  border-radius: 50rem;
+}
 </style>

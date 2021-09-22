@@ -1,5 +1,5 @@
 <template>
-  <div class="input-group pb-4">
+  <div class="input-group mb-4">
     <div class="stopwatch mx-auto">
       <h2 class="stopwatch__text" id="timeText">{{ printTime }}</h2>
       <div class="btn-group btn-group-round" role="group">

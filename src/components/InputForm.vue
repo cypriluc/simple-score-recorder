@@ -1,67 +1,75 @@
 <template>
-  <form @submit.prevent="createResult" autocomplete="off">
-    <!-- Name -->
-    <div class="input-group pb-4">
-      <label for="participantName" class="form-label m-2">Jméno</label>
-      <input
-        id="participantName"
-        type="text"
-        class="form-control"
-        placeholder="Name"
-        aria-label="Name"
-        v-model="result.name"
-        required
-      />
-    </div>
-
-    <!-- StopWatch -->
-    <StopWatch @elapsedTime="saveElapsedTime" ref="stopWatch" />
-
-    <!-- Penalty -->
+  <form @submit.prevent="createResult" autocomplete="off" class="container">
     <div class="row">
-      <div v-for="(item, item_index) in Items" :key="item" class="col p-4">
-        <h5 class="text-left">{{ item }}</h5>
-
-        <div
-          class="btn-group btn-group-round"
-          role="group"
-          aria-label="Group of options for penalty points"
-        >
-          <template
-            v-for="(option, index) in penaltyOptions"
-            :key="item_index + index"
-          >
-            <input
-              type="radio"
-              class="btn-check"
-              :name="'btnradio-' + item_index"
-              :id="'option-' + item_index + '-' + index"
-              :value="option.value"
-              v-model="penaltyPoints[item_index]"
-              :checked="index == 0"
-            />
-
-            <label
-              :for="'option-' + item_index + '-' + index"
-              class="btn btn-sm"
-              :class="option.class"
-            >
-              {{ option.label }}
-            </label>
-          </template>
+      <div class="col-4 mr-4">
+        <!-- Name -->
+        <div class="input-group mb-4">
+          <!--       <label for="participantName" class="form-label m-2">Jméno</label> -->
+          <span class="input-group-text" id="nameLabel">Jméno</span>
+          <input
+            id="participantName"
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            aria-label="Name"
+            aria-describedby="nameLabel"
+            v-model="result.name"
+            required
+          />
         </div>
+
+        <!-- StopWatch -->
+        <StopWatch @elapsedTime="saveElapsedTime" ref="stopWatch" />
       </div>
 
-      <p>Penalty: {{ penaltyFormated }}</p>
+      <div class="col-8 ml-4">
+        <!-- Penalty -->
+        <div class="row text-left">
+          <div v-for="(item, item_index) in Items" :key="item" class="col p-2">
+            <h5 class="text-left">{{ item }}</h5>
+
+            <div
+              class="btn-group btn-group-round mb-2"
+              role="group"
+              aria-label="Group of options for penalty points"
+            >
+              <template
+                v-for="(option, index) in penaltyOptions"
+                :key="item_index + index"
+              >
+                <input
+                  type="radio"
+                  class="btn-check"
+                  :name="'btnradio-' + item_index"
+                  :id="'option-' + item_index + '-' + index"
+                  :value="option.value"
+                  v-model="penaltyPoints[item_index]"
+                  :checked="index == 0"
+                />
+
+                <label
+                  :for="'option-' + item_index + '-' + index"
+                  class="btn btn-sm"
+                  :class="option.class"
+                >
+                  {{ option.label }}
+                </label>
+              </template>
+            </div>
+          </div>
+
+          <p class="">Penalty: {{ penaltyFormated }}</p>
+        </div>
+      </div>
     </div>
 
-    <div class="input-group pb-4">
+    <div class="pb-4">
       <h4>
         Total Score: <span>{{ currentScoreFormated }}</span>
       </h4>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-round m-2" id="submitBtn">
+    <button type="submit" class="btn btn-info btn-round m-2" id="submitBtn">
       Zapsat výsledek
     </button>
   </form>
@@ -103,14 +111,14 @@ export default {
       requestResult: 0,
       currentName: "",
       Items: [
-        "First Item",
-        "Second Item",
-        "Third Item",
-        "Fourth Item",
-        "Fifth Item",
-        "Sixth Item",
-        "Seventh Item",
-        "Eight Item",
+        "Objekt 1",
+        "Objekt 2",
+        "Objekt 3",
+        "Objekt 4",
+        "Objekt 5",
+        "Objekt 6",
+        "Objekt 7",
+        "Objekt 8",
       ],
       penaltyPoints: new Array(8).fill(0),
       penaltyOptions: [

@@ -1,5 +1,5 @@
 <template>
-  <div class="home container">
+  <div class="home__container">
     <InputForm />
   </div>
   <router-link to="/results" target="_blank">Výsledky</router-link>
@@ -29,3 +29,5 @@ export default {
   methods: {},
 };
 </script>
+
+<style scoped lang="scss"></style>
