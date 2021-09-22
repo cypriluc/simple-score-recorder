@@ -1,7 +1,10 @@
 <template>
   <div class="input-group mb-4">
     <div class="stopwatch mx-auto">
-      <h2 class="stopwatch__text" id="timeText">{{ printTime }}</h2>
+      <div class="stopwatch__circle">
+        <h2 class="stopwatch__text" id="timeText">{{ printTime }}</h2>
+      </div>
+
       <div class="btn-group btn-group-round" role="group">
         <button
           id="startBtn"
@@ -75,7 +78,20 @@ export default {
 .stopwatch {
   &__text {
     text-align: left;
-    margin-left: 2.5rem;
+    margin: 0;
+    margin-left: 1.5rem;
+    font-size: 3rem;
+  }
+
+  &__circle {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 100%;
+    border: 3px solid rgba($blue, 0.8);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 2rem 0;
   }
 }
 </style>

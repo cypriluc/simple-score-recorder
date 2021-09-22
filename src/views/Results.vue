@@ -1,6 +1,7 @@
 <template>
   <div class="about">
-    <h1>Síň slávy</h1>
+    <!-- <h1>&#127942; &#127881; Síň slávy &#127881; &#10024;</h1> -->
+    <h1 class="my-4">&#127881; Síň slávy &#127881;</h1>
     <ScoreTable />
   </div>
 </template>

@@ -25,7 +25,11 @@
       <div class="col-8 ml-4">
         <!-- Penalty -->
         <div class="row text-left">
-          <div v-for="(item, item_index) in Items" :key="item" class="col p-2">
+          <div
+            v-for="(item, item_index) in Items"
+            :key="item"
+            class="col-3 p-2"
+          >
             <h5 class="text-left">{{ item }}</h5>
 
             <div
