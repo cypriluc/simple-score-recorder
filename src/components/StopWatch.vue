@@ -93,7 +93,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     margin: 1.5rem 0;
-    background-color: rgba(#fff, 0.6);
+    //background-color: rgba(#fff, 0.6);
   }
 }
 

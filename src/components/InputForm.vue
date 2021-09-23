@@ -70,7 +70,7 @@
         id="participantName"
         type="text"
         class="form-control"
-        placeholder="Name"
+        placeholder="Jméno"
         aria-label="Name"
         aria-describedby="nameLabel"
         v-model="result.name"
@@ -81,9 +81,8 @@
     <!-- SUMMARY -->
     <div class="form__sum">
       <!-- TOTAL SCORE -->
-
-      <h4>
-        Total Score: <span>{{ currentScoreFormated }}</span>
+      <h4 class="blue">
+        Celkové skóre: <span class="bold">{{ currentScoreFormated }}</span>
       </h4>
 
       <!-- SEND FORM -->
@@ -345,5 +344,13 @@ export default {
   position: absolute;
   right: 0;
   bottom: -2.5rem;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.blue {
+  color: $cyan;
 }
 </style>
