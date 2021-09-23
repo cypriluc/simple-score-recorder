@@ -1,8 +1,5 @@
 <template>
-  <div class="home__container">
-    <InputForm />
-  </div>
-  <router-link to="/results" target="_blank">Výsledky</router-link>
+  <InputForm />
 </template>
 
 <script>

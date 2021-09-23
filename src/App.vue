@@ -48,16 +48,13 @@ $light: #ede7ea;
   align-items: center;
   justify-content: center;
 }
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Roboto Slab", Arial, sans-serif;
-}
-
 h1 {
   font-weight: 900 !important;
+}
+
+h3,
+h4 {
+  font-weight: 400;
 }
 
 .content {
@@ -71,6 +68,7 @@ h1 {
   box-shadow: 5px 5px 10px rgba(#000, 0.2);
   border-radius: 0.25rem;
   max-width: 1300px;
+  position: relative;
 }
 
 .btn-group-round > .btn {

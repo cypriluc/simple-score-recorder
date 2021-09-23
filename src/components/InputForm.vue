@@ -1,95 +1,105 @@
 <template>
-  <form @submit.prevent="createResult" autocomplete="off" class="container">
-    <div class="row">
-      <div class="col-4 mr-4">
-        <!-- Name -->
-        <div class="input-group mb-4">
-          <!--       <label for="participantName" class="form-label m-2">Jméno</label> -->
-          <span class="input-group-text" id="nameLabel">Jméno</span>
+  <form @submit.prevent="createResult" autocomplete="off" class="form">
+    <!-- STOPWATCH -->
+    <div class="form__watch">
+      <StopWatch @elapsedTime="saveElapsedTime" ref="stopWatch" />
+    </div>
+
+    <!-- PENALTIES -->
+    <div class="form__penalty">
+      <!-- Penalty -->
+      <div class="row text-left">
+        <div
+          v-for="(item, item_index) in Items"
+          :key="item"
+          class="form__object col-xl-4 col-md-6"
+        >
+          <h5 class="text-left">{{ item }}</h5>
+
+          <!-- OBJECT GUESS RESULT - OPTIONS GROUP -->
+          <div
+            class="btn-group btn-group-round mb-2"
+            role="group"
+            aria-label="Group of options for penalty points"
+          >
+            <template
+              v-for="(option, index) in penaltyOptions"
+              :key="item_index + index"
+            >
+              <input
+                type="radio"
+                class="btn-check"
+                :name="'btnradio-' + item_index"
+                :id="'option-' + item_index + '-' + index"
+                :value="option.value"
+                v-model="penaltyPoints[item_index]"
+                :checked="index == 0"
+              />
+
+              <label
+                :for="'option-' + item_index + '-' + index"
+                class="btn btn-sm"
+                :class="option.class"
+              >
+                <font-awesome-icon :icon="option.icon" class="icon" />
+              </label>
+            </template>
+          </div>
+
+          <!-- NOTE -->
           <input
-            id="participantName"
             type="text"
-            class="form-control"
-            placeholder="Name"
-            aria-label="Name"
-            aria-describedby="nameLabel"
-            v-model="result.name"
-            required
+            placeholder="poznámka"
+            id="itemNote"
+            class="form-control form-control-sm"
+            aria-label="note"
           />
         </div>
 
-        <!-- StopWatch -->
-        <StopWatch @elapsedTime="saveElapsedTime" ref="stopWatch" />
-      </div>
-
-      <div class="col-8 ml-4">
-        <!-- Penalty -->
-        <div class="row text-left">
-          <div
-            v-for="(item, item_index) in Items"
-            :key="item"
-            class="col-4 p-2"
-          >
-            <h5 class="text-left">{{ item }}</h5>
-
-            <!-- OBJECT GUESS RESULT - OPTIONS GROUP -->
-            <div
-              class="btn-group btn-group-round mb-2"
-              role="group"
-              aria-label="Group of options for penalty points"
-            >
-              <template
-                v-for="(option, index) in penaltyOptions"
-                :key="item_index + index"
-              >
-                <input
-                  type="radio"
-                  class="btn-check"
-                  :name="'btnradio-' + item_index"
-                  :id="'option-' + item_index + '-' + index"
-                  :value="option.value"
-                  v-model="penaltyPoints[item_index]"
-                  :checked="index == 0"
-                />
-
-                <label
-                  :for="'option-' + item_index + '-' + index"
-                  class="btn btn-sm"
-                  :class="option.class"
-                >
-                  <font-awesome-icon :icon="option.icon" class="icon" />
-                </label>
-              </template>
-            </div>
-
-            <!-- NOTE -->
-            <input
-              type="text"
-              placeholder="poznámka"
-              id="itemNote"
-              class="form-control form-control-sm"
-              aria-label="note"
-            />
-          </div>
-
-          <!-- TOTAL PENALTY -->
-          <p class="">Penalty: {{ penaltyFormated }}</p>
-        </div>
+        <!-- TOTAL PENALTY -->
+        <h5 class="text-left pt-2">Penalizace: {{ penaltyFormated }}</h5>
       </div>
     </div>
 
-    <!-- TOTAL SCORE -->
-    <div class="pb-4">
+    <!-- NAME -->
+    <div class="form__name input-group">
+      <!--       <label for="participantName" class="form-label m-2">Jméno</label> -->
+      <span class="input-group-text" id="nameLabel">Jméno</span>
+      <input
+        id="participantName"
+        type="text"
+        class="form-control"
+        placeholder="Name"
+        aria-label="Name"
+        aria-describedby="nameLabel"
+        v-model="result.name"
+        required
+      />
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="form__sum">
+      <!-- TOTAL SCORE -->
+
       <h4>
         Total Score: <span>{{ currentScoreFormated }}</span>
       </h4>
-    </div>
 
-    <!-- SEND FORM -->
-    <button type="submit" class="btn btn-info btn-round m-2" id="submitBtn">
-      Zapsat výsledek
-    </button>
+      <!-- SEND FORM -->
+      <button
+        type="submit"
+        class="btn btn-lg btn-info btn-round m-2"
+        id="submitBtn"
+      >
+        Zapsat výsledek
+      </button>
+    </div>
   </form>
+
+  <!--   ALL RESULTS LINK -->
+  <router-link to="/results" target="_blank" class="results-link"
+    >Výsledky</router-link
+  >
 
   <!-- alert message -->
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -259,9 +269,34 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.form {
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  grid-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+
+  &__object {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+  }
+
+  &__sum {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
 .hidden {
   opacity: 0;
   visibility: none;
+  display: none;
 }
 
 .message {
@@ -293,11 +328,17 @@ export default {
 
 #itemNote {
   border-radius: 10rem;
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
 }
 
-.icon {
-  margin: 0 0.5rem;
+.text-left {
+  text-align: left !important;
+}
+
+.results-link {
+  color: #fff;
+  position: absolute;
+  right: 0;
+  bottom: -2.5rem;
 }
 </style>

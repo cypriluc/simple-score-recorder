@@ -5,34 +5,34 @@
         <h2 class="stopwatch__text" id="timeText">{{ printTime }}</h2>
       </div>
 
-      <div class="btn-group btn-group-round" role="group">
-        <button
-          id="startBtn"
-          type="button"
-          class="btn btn-light"
-          v-on:click="start()"
-        >
-          <font-awesome-icon icon="play" class="icon" />
-        </button>
-        <button
-          id="stopBtn"
-          type="button"
-          class="btn btn-light"
-          v-on:click="stop()"
-        >
-          <font-awesome-icon icon="pause" class="icon" />
-        </button>
-        <button
-          id="resetBtn"
-          type="button"
-          class="btn btn-danger"
-          v-on:click="reset()"
-        >
-          <font-awesome-icon icon="stop" class="icon icon--white" />
-        </button>
-      </div>
+      <!--  <div class="btn-group btn-group-round" role="group"> -->
+      <button
+        id="startBtn"
+        type="button"
+        class="btn btn-info btn-round mx-2"
+        v-on:click="start()"
+      >
+        <font-awesome-icon icon="play" class="icon icon--white" />
+      </button>
+      <button
+        id="stopBtn"
+        type="button"
+        class="btn btn-info btn-round mx-2"
+        v-on:click="stop()"
+      >
+        <font-awesome-icon icon="pause" class="icon icon--white" />
+      </button>
+      <button
+        id="resetBtn"
+        type="button"
+        class="btn btn-danger btn-round mx-2"
+        v-on:click="reset()"
+      >
+        <font-awesome-icon icon="stop" class="icon icon--white" />
+      </button>
     </div>
   </div>
+  <!--   </div> -->
 </template>
 
 <script>
@@ -79,25 +79,26 @@ export default {
   &__text {
     text-align: left;
     margin: 0;
-    margin-left: 1.5rem;
+    margin-left: 2rem;
     font-size: 3rem;
+    color: $cyan;
   }
 
   &__circle {
-    width: 15rem;
-    height: 15rem;
+    width: 17rem;
+    height: 17rem;
     border-radius: 100%;
-    border: 3px solid rgba($blue, 0.8);
+    border: 3px solid rgba($cyan, 0.8);
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
+    background-color: rgba(#fff, 0.6);
   }
 }
 
 .icon {
-  color: $blue;
-  margin: 0 0.5rem;
+  color: $cyan;
 
   &--white {
     color: #fff;
