@@ -28,10 +28,11 @@
           <div
             v-for="(item, item_index) in Items"
             :key="item"
-            class="col-3 p-2"
+            class="col-4 p-2"
           >
             <h5 class="text-left">{{ item }}</h5>
 
+            <!-- OBJECT GUESS RESULT - OPTIONS GROUP -->
             <div
               class="btn-group btn-group-round mb-2"
               role="group"
@@ -52,6 +53,25 @@
                 />
 
                 <label
+                  v-if="index == 0"
+                  :for="'option-' + item_index + '-' + index"
+                  class="btn btn-sm"
+                  :class="option.class"
+                >
+                  &nbsp; &#10004; &nbsp;
+                </label>
+
+                <label
+                  v-else-if="index == 3"
+                  :for="'option-' + item_index + '-' + index"
+                  class="btn btn-sm"
+                  :class="option.class"
+                >
+                  &nbsp; &#10006; &nbsp;
+                </label>
+
+                <label
+                  v-else
                   :for="'option-' + item_index + '-' + index"
                   class="btn btn-sm"
                   :class="option.class"
@@ -60,19 +80,31 @@
                 </label>
               </template>
             </div>
+
+            <!-- NOTE -->
+            <input
+              type="text"
+              placeholder="poznámka"
+              id="itemNote"
+              class="form-control form-control-sm"
+              aria-label="note"
+            />
           </div>
 
+          <!-- TOTAL PENALTY -->
           <p class="">Penalty: {{ penaltyFormated }}</p>
         </div>
       </div>
     </div>
 
+    <!-- TOTAL SCORE -->
     <div class="pb-4">
       <h4>
         Total Score: <span>{{ currentScoreFormated }}</span>
       </h4>
     </div>
 
+    <!-- SEND FORM -->
     <button type="submit" class="btn btn-info btn-round m-2" id="submitBtn">
       Zapsat výsledek
     </button>
@@ -126,9 +158,10 @@ export default {
       ],
       penaltyPoints: new Array(8).fill(0),
       penaltyOptions: [
-        { label: "Great", value: 0, class: "btn-outline-info" },
-        { label: "OK", value: 10000, class: "btn-outline-secondary" },
-        { label: "Fail", value: 20000, class: "btn-outline-danger" },
+        { label: "všechno", value: 0, class: "btn-outline-info" },
+        { label: "objekt", value: 10000, class: "btn-outline-secondary" },
+        { label: "místo", value: 10001, class: "btn-outline-secondary" },
+        { label: "nic", value: 20000, class: "btn-outline-danger" },
       ],
     };
   },
@@ -255,5 +288,11 @@ export default {
       font-weight: 700;
     }
   }
+}
+
+#itemNote {
+  border-radius: 10rem;
+  width: 90%;
+  margin: 0 auto;
 }
 </style>
