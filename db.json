@@ -18,89 +18,58 @@
       "scoreFormated": "01:14.35"
     },
     {
-      "id": 1633616,
-      "name": "Linda",
-      "time": 10760,
+      "id": 965573,
+      "name": "Adam",
+      "time": 30080,
       "penalties": [
         0,
         0,
-        0,
+        10000,
+        10001,
+        10000,
         20000,
-        10000,
-        0,
-        0,
-        20000
-      ],
-      "score": 60760,
-      "scoreFormated": "01:00.76"
-    },
-    {
-      "id": 5839563,
-      "name": "Luc",
-      "time": 15110,
-      "penalties": [
-        0,
-        0,
-        10000,
-        10000,
-        0,
-        0,
-        0,
-        10000
-      ],
-      "score": 45110,
-      "scoreFormated": "00:45.11"
-    },
-    {
-      "id": 4628408,
-      "name": "Kia",
-      "time": 16840,
-      "penalties": [
         20000,
-        0,
-        0,
-        20000,
-        0,
-        0,
-        0,
-        10000
-      ],
-      "score": 66840,
-      "scoreFormated": "01:06.84"
-    },
-    {
-      "id": 7183619,
-      "name": "Honza",
-      "time": 15090,
-      "penalties": [
-        10000,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        10000
-      ],
-      "score": 35090,
-      "scoreFormated": "00:35.09"
-    },
-    {
-      "id": 6668375,
-      "name": "šimonko",
-      "time": 5580,
-      "penalties": [
-        10000,
-        0,
-        0,
-        20000,
-        10000,
-        0,
-        0,
         0
       ],
-      "score": 45580,
-      "scoreFormated": "00:45.58"
+      "notes": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "score": 100081,
+      "scoreFormated": "01:40.08"
+    },
+    {
+      "id": 2977399,
+      "name": "Lisa",
+      "time": 41440,
+      "penalties": [
+        10000,
+        0,
+        0,
+        0,
+        10001,
+        20000,
+        10000,
+        0
+      ],
+      "notes": [
+        "dle barvy",
+        "",
+        "",
+        "",
+        "nahore",
+        "",
+        "",
+        "delsi cas v prostoru v posledni mistnosti"
+      ],
+      "score": 91441,
+      "scoreFormated": "01:31.44"
     }
   ]
 }

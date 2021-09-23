@@ -53,6 +53,7 @@
             id="itemNote"
             class="form-control form-control-sm"
             aria-label="note"
+            v-model="penaltyNotes[item_index]"
           />
         </div>
 
@@ -148,6 +149,7 @@ export default {
         "Objekt 8",
       ],
       penaltyPoints: new Array(8).fill(0),
+      penaltyNotes: new Array(8).fill(""),
       penaltyOptions: [
         {
           label: "všechno",
@@ -206,6 +208,7 @@ export default {
     createResult() {
       this.currentName = this.result.name;
       this.result.penalties = this.penaltyPoints;
+      this.result.notes = this.penaltyNotes;
 
       this.result.score = this.currentScore;
       this.result.scoreFormated = this.currentScoreFormated;
@@ -219,6 +222,7 @@ export default {
 
           this.result = this.createFreshResult();
           this.penaltyPoints = new Array(8).fill(0);
+          this.penaltyNotes = new Array(8).fill("");
         })
         .catch((err) => {
           console.log("There was an error creating your result:");
@@ -239,6 +243,7 @@ export default {
         name: "",
         time: 0,
         penalties: [],
+        notes: [],
         score: 0,
         scoreFormated: "",
       };
