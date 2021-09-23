@@ -53,30 +53,11 @@
                 />
 
                 <label
-                  v-if="index == 0"
                   :for="'option-' + item_index + '-' + index"
                   class="btn btn-sm"
                   :class="option.class"
                 >
-                  &nbsp; &#10004; &nbsp;
-                </label>
-
-                <label
-                  v-else-if="index == 3"
-                  :for="'option-' + item_index + '-' + index"
-                  class="btn btn-sm"
-                  :class="option.class"
-                >
-                  &nbsp; &#10006; &nbsp;
-                </label>
-
-                <label
-                  v-else
-                  :for="'option-' + item_index + '-' + index"
-                  class="btn btn-sm"
-                  :class="option.class"
-                >
-                  {{ option.label }}
+                  <font-awesome-icon :icon="option.icon" class="icon" />
                 </label>
               </template>
             </div>
@@ -158,10 +139,30 @@ export default {
       ],
       penaltyPoints: new Array(8).fill(0),
       penaltyOptions: [
-        { label: "všechno", value: 0, class: "btn-outline-info" },
-        { label: "objekt", value: 10000, class: "btn-outline-secondary" },
-        { label: "místo", value: 10001, class: "btn-outline-secondary" },
-        { label: "nic", value: 20000, class: "btn-outline-danger" },
+        {
+          label: "všechno",
+          icon: "check",
+          value: 0,
+          class: "btn-outline-info",
+        },
+        {
+          label: "objekt",
+          icon: "cube",
+          value: 10000,
+          class: "btn-outline-secondary",
+        },
+        {
+          label: "místo",
+          icon: "map-marker-alt",
+          value: 10001,
+          class: "btn-outline-secondary",
+        },
+        {
+          label: "nic",
+          icon: "times",
+          value: 20000,
+          class: "btn-outline-danger",
+        },
       ],
     };
   },
@@ -294,5 +295,9 @@ export default {
   border-radius: 10rem;
   width: 90%;
   margin: 0 auto;
+}
+
+.icon {
+  margin: 0 0.5rem;
 }
 </style>

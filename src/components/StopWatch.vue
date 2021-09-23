@@ -12,7 +12,7 @@
           class="btn btn-light"
           v-on:click="start()"
         >
-          Start
+          <font-awesome-icon icon="play" class="icon" />
         </button>
         <button
           id="stopBtn"
@@ -20,7 +20,7 @@
           class="btn btn-light"
           v-on:click="stop()"
         >
-          Stop
+          <font-awesome-icon icon="pause" class="icon" />
         </button>
         <button
           id="resetBtn"
@@ -28,7 +28,7 @@
           class="btn btn-danger"
           v-on:click="reset()"
         >
-          Reset
+          <font-awesome-icon icon="stop" class="icon icon--white" />
         </button>
       </div>
     </div>
@@ -92,6 +92,15 @@ export default {
     justify-content: flex-start;
     align-items: center;
     margin: 2rem 0;
+  }
+}
+
+.icon {
+  color: $blue;
+  margin: 0 0.5rem;
+
+  &--white {
+    color: #fff;
   }
 }
 </style>

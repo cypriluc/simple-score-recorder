@@ -44,6 +44,9 @@ $light: #ede7ea;
     url("./assets/symbol_cvut_konturova_verze_negativ.svg");
   min-height: 100vh;
   overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h1,
@@ -67,6 +70,7 @@ h1 {
   padding: 2rem;
   box-shadow: 5px 5px 10px rgba(#000, 0.2);
   border-radius: 0.25rem;
+  max-width: 1300px;
 }
 
 .btn-group-round > .btn {
