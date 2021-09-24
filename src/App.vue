@@ -51,7 +51,7 @@ $light: #ede7ea;
 }
 
 .bg {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 60%;
   right: -5rem;
