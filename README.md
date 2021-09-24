@@ -1,5 +1,14 @@
 # Simple Score Recorder for Memorable Space 
-## Save results of a research game in VR
+**Save results of a research game in VR**
+
+![screen - frontend](https://user-images.githubusercontent.com/64001284/134646240-8b463819-64e5-4f58-b34c-90b075f63e71.png)
+*Home page - Input form for results*
+
+
+![screen-results](https://user-images.githubusercontent.com/64001284/134646342-1f31dd09-3dab-4cfe-9019-d81dfe1c11bc.png)
+*Results page - Table with sorted results*
+
+
 
 ## Project setup
 ```
